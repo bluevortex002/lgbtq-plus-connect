@@ -1,0 +1,98 @@
+/api/signIn
+in:
+    username: str
+    hashedPassword: str,
+    selfBioSex: male | female | both,
+    selfPsySex: male | female | both,
+out:
+    userId: UUID
+    token: str
+#########################
+/api/login
+in:
+    username: str
+    hashedPassword: str
+out:
+    username: str
+    hashedPassword: str
+    selfBioSex: male | female | both,
+    selfPsySex: male | female | both,
+    description: str
+    token: str
+#########################
+/api/logout
+in:
+    token: str
+out:
+#########################
+/api/uploadAvatar
+in:
+    blob data in HTTP request body, with PUT method
+#########################
+/api/getRecommendedUser
+in:
+out:
+    user[]:
+        username: str
+        hashedPassword: str,
+        selfBioSex: male | female | both
+        selfPsySex: male | female | both
+        description: str
+        avatarUrl: str
+        distanceInKm: int
+#########################
+/api/likeUser
+in:
+    userId: UUID
+out:
+#########################
+/api/listMyFavorUser
+in:
+out:
+    user[]:
+        username: str
+        hashedPassword: str,
+        selfBioSex: male | female | both
+        selfPsySex: male | female | both
+        description: str
+        avatarUrl: str
+        distanceInKm: int
+        whenYouLikeIt: YYYY-MM-DD hh:mm:ss.xxx(standard date format)
+#########################
+/api/msgToUser
+in:
+    msg: str
+    userId: UUID
+out:
+    timestamp: YYYY-MM-DD hh:mm:ss.xxx
+#########################
+/api/listForum
+in:
+out:
+    Forum[]:
+        forumId: UUID
+        forumName: str
+        forumDescription: str
+        createdOn: date
+#########################
+/api/joinForum
+in:
+    forumId: UUID
+out:
+#########################
+/api/sendMsgToForum
+in:
+    msg: str
+    forumId: UUID
+#########################
+/api/getLatestMsg # these messages include 1to1 talk and forum message
+in:
+    userMsg[]:
+        - userId: UUID
+          msg: str
+          timestamp: date
+    forumMsg[]:
+        - forumId: UUID
+          msg: str
+          timestamp: Date
+          fromUser: User
