@@ -1,57 +1,56 @@
-/api/signIn
+/auth/signUp
 in:
     username: str
-    hashedPassword: str,
+    userPk: str,
     selfBioSex: male | female | both,
     selfPsySex: male | female | both,
 out:
-    userId: UUID
-    token: str
 #########################
-/api/login
+/auth/login
 in:
     username: str
-    hashedPassword: str
+    ppkEncryptedUsername: str
 out:
     username: str
-    hashedPassword: str
     selfBioSex: male | female | both,
     selfPsySex: male | female | both,
     description: str
-    token: str
+    pkEncryptedToken: str
 #########################
-/api/logout
+Include token in authorization header and username in uesr header for all below apis
+A more secured implementation would be, encrypting the request body with the token and only keep username in the header without the token
+#########################
+/auth/logout
 in:
-    token: str
 out:
 #########################
-/api/uploadAvatar
+/user/uploadAvatar
 in:
     blob data in HTTP request body, with PUT method
 #########################
-/api/getRecommendedUser
+/match/getRecommendedUser
 in:
 out:
     user[]:
+        userId: UUID
         username: str
-        hashedPassword: str,
         selfBioSex: male | female | both
         selfPsySex: male | female | both
         description: str
         avatarUrl: str
         distanceInKm: int
 #########################
-/api/likeUser
+/match/likeUser
 in:
     userId: UUID
 out:
 #########################
-/api/listMyFavorUser
+/match/listMatchedUser
 in:
 out:
     user[]:
+        userId: UUID
         username: str
-        hashedPassword: str,
         selfBioSex: male | female | both
         selfPsySex: male | female | both
         description: str
@@ -59,14 +58,14 @@ out:
         distanceInKm: int
         whenYouLikeIt: YYYY-MM-DD hh:mm:ss.xxx(standard date format)
 #########################
-/api/msgToUser
+/chat/msgToUser
 in:
     msg: str
     userId: UUID
 out:
     timestamp: YYYY-MM-DD hh:mm:ss.xxx
 #########################
-/api/listForum
+/chat/listForum
 in:
 out:
     Forum[]:
@@ -75,17 +74,18 @@ out:
         forumDescription: str
         createdOn: date
 #########################
-/api/joinForum
+/chat/joinForum
 in:
     forumId: UUID
 out:
 #########################
-/api/sendMsgToForum
+/chat/sendMsgToForum
 in:
     msg: str
     forumId: UUID
+out:
 #########################
-/api/getLatestMsg # these messages include 1to1 talk and forum message
+/chat/getLatestMsg # these messages include 1to1 talk and forum message
 in:
     userMsg[]:
         - userId: UUID
