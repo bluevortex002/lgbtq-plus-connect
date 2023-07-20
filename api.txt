@@ -11,11 +11,7 @@ in:
     username: str
     ppkEncryptedUsername: str
 out:
-    username: str
-    selfBioSex: male | female | both,
-    selfPsySex: male | female | both,
-    description: str
-    pkEncryptedToken: str
+    userId: UUID // null if login is not successful
 #########################
 Include token in authorization header and username in uesr header for all below apis
 A more secured implementation would be, encrypting the request body with the token and only keep username in the header without the token
@@ -23,6 +19,15 @@ A more secured implementation would be, encrypting the request body with the tok
 /auth/logout
 in:
 out:
+#########################
+/user/{id:UUID}
+in:
+out:
+    username: str
+    selfBioSex: male | female | both,
+    selfPsySex: male | female | both,
+    description: str
+    pkEncryptedToken: str
 #########################
 /user/uploadAvatar
 in:
