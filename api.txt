@@ -11,7 +11,7 @@ in:
     username: str
     ppkEncryptedUsername: str
 out:
-    userId: UUID // null if login is not successful
+    id: UUID // null if login is not successful
 #########################
 Include token in authorization header and username in uesr header for all below apis
 A more secured implementation would be, encrypting the request body with the token and only keep username in the header without the token
