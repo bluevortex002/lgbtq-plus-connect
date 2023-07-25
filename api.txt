@@ -38,7 +38,7 @@ in:
 in:
 out:
     user[]:
-        userId: UUID
+        id: UUID
         username: str
         selfBioSex: male | female | both
         selfPsySex: male | female | both
@@ -55,7 +55,7 @@ out:
 in:
 out:
     user[]:
-        userId: UUID
+        id: UUID
         username: str
         selfBioSex: male | female | both
         selfPsySex: male | female | both
